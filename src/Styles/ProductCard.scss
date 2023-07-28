@@ -1,0 +1,27 @@
+@import "../Styles/_Variables.scss";
+
+.product-card {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  aspect-ratio: 1/1;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.3125rem;
+  }
+
+  .delete-checkbox {
+    position: absolute;
+    top: 0.3125rem;
+    left: 0.3125rem;
+    accent-color: $dark-red;
+  }
+}
