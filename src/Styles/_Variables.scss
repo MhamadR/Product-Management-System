@@ -1,0 +1,19 @@
+$light-red: hsl(0, 100%, 80%);
+$dark-red: hsl(0, 100%, 60%);
+$light-green: hsl(151, 73%, 70%);
+$dark-green: hsl(151, 73%, 50%);
+
+@mixin buttonStyle($color) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.625rem;
+  color: black;
+  padding: 0.1563rem 0.3125rem;
+  background-color: $color;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 0.3125rem;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
