@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.0625rem solid black;
+  padding: 0 0.3125rem;
+
+  .navbar-title {
+    font-size: 1.25rem;
+  }
+
+  .navbar-buttons {
+    display: flex;
+    height: fit-content;
+    gap: 0.3125rem;
+  }
+}
