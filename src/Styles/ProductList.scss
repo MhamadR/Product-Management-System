@@ -1,0 +1,40 @@
+@import "../Styles/_Variables.scss";
+
+.products-list-container {
+  width: 100%;
+
+  .add-btn {
+    @include buttonStyle($light-green);
+  }
+
+  .add-btn:hover,
+  .add-btn:active {
+    @include buttonStyle($dark-green);
+  }
+
+  .delete-btn {
+    @include buttonStyle($light-red);
+  }
+
+  .delete-btn:hover,
+  .delete-btn:active {
+    @include buttonStyle($dark-red);
+  }
+
+  .product-list {
+    display: grid;
+    width: 100%;
+    gap: 1.25rem;
+    padding: 0.625rem 0.3125rem;
+
+    @media screen and (min-width: 340px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (min-width: 490px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
