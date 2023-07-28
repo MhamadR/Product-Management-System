@@ -1,0 +1,96 @@
+@import "../Styles/_Variables.scss";
+
+.add-products-container {
+  width: 100%;
+
+  .save-btn {
+    @include buttonStyle($light-green);
+  }
+
+  .save-btn:hover,
+  .save-btn:active {
+    @include buttonStyle($dark-green);
+  }
+
+  .cancel-btn {
+    @include buttonStyle($light-red);
+  }
+
+  .cancel-btn:hover,
+  .cancel-btn:active {
+    @include buttonStyle($dark-red);
+  }
+
+  .product-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+
+    padding: 0.625rem 0.3125rem;
+
+    .input-container {
+      width: min(100%, 350px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.1875rem;
+
+      @media screen and (max-width: 340px) {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      input,
+      select {
+        max-width: 100%;
+        border: 1px solid hsl(0, 0%, 52%);
+        border-radius: 3px;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 2px solid hsl(0, 0%, 35%);
+      }
+
+      input.invalid {
+        border: 1px solid $light-red;
+      }
+
+      input.invalid:focus {
+        outline: 2px solid $dark-red;
+      }
+
+      // Remove arrow controllers on inputs with type number
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+    }
+
+    .dynamic-message {
+      font-size: 10px;
+      font-weight: 600;
+      color: hsl(0, 0%, 52%);
+    }
+
+    .invalid-message {
+      flex: 1 0 100%;
+      align-self: flex-end;
+      text-align: end;
+      font-size: 10px;
+      font-weight: 600;
+      color: $dark-red;
+    }
+
+    .form-message {
+      text-align: center;
+      align-self: center;
+    }
+  }
+}
