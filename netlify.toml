@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://antiwar-containers.000webhostapp.com/:splat"
+  status = 200
+  force = true
