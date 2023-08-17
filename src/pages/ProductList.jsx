@@ -8,7 +8,7 @@ import "../Styles/ProductList.scss";
 function ProductList() {
   const [products, setProducts] = useState(null);
   const [selectedProductIds, setselectedProductIds] = useState([]);
-  const URL = "https://antiwar-containers.000webhostapp.com/products";
+  const URL = "/api/products";
 
   useEffect(() => {
     // Creating controller to Abort fetch on component unmount
@@ -48,19 +48,12 @@ function ProductList() {
 
   async function deleteProductsByIds() {
     try {
-      await axios.post(
-        URL,
-        {
-          ids: selectedProductIds,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-          },
-        }
-      );
-    } catch (e) {
-      console.log(`Error: ${e}, Error Message: ${e.message}`);
+      await axios.post(URL, {
+        ids: selectedProductIds,
+      });
+      setselectedProductIds(() => []);
+    } catch (error) {
+      console.log(`Error: ${error}, Error Message: ${error.message}`);
     }
   }
 
