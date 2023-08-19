@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../Styles/AddProduct.scss";
+import Button from "../components/Button";
 
 function AddProduct() {
   const [formInput, setFormInput] = useState({
@@ -107,16 +107,15 @@ function AddProduct() {
   return (
     <div className="add-products-container">
       <Navbar title="Add Product">
-        <input
+        <Button
+          element={"input"}
           type="submit"
           id="save-product-btn"
-          className="save-btn"
+          className="save-btn btn-success"
           value="SAVE"
           form="product_form"
         />
-        <Link to="/" className="cancel-btn">
-          CANCEL
-        </Link>
+        <Button to="/" className="cancel-btn btn-danger" value={"CANCEL"} />
       </Navbar>
 
       <form id="product_form" className="product-form" onSubmit={handleSubmit}>

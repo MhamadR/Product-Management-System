@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
 import axios from "axios";
 import "../Styles/ProductList.scss";
+import Button from "../components/Button";
 
 function ProductList() {
   const [products, setProducts] = useState(null);
@@ -101,16 +101,17 @@ function ProductList() {
   return (
     <div className="products-list-container">
       <Navbar title="Product List">
-        <Link to="/add-product" className="add-btn">
-          ADD
-        </Link>
-        <button
+        <Button
+          to="/add-product"
+          className="add-btn btn-success"
+          value={"ADD"}
+        />
+        <Button
           id="delete-product-btn"
-          className="delete-btn"
+          className="delete-btn btn-danger"
           onClick={deleteProductsByIds}
-        >
-          MASS DELETE
-        </button>
+          value={"MASS DELETE"}
+        />
       </Navbar>
       <div className="product-list">{productList}</div>
     </div>
