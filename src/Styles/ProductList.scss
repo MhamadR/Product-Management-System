@@ -3,24 +3,6 @@
 .products-list-container {
   width: 100%;
 
-  .add-btn {
-    @include buttonStyle($light-green);
-  }
-
-  .add-btn:hover,
-  .add-btn:active {
-    @include buttonStyle($dark-green);
-  }
-
-  .delete-btn {
-    @include buttonStyle($light-red);
-  }
-
-  .delete-btn:hover,
-  .delete-btn:active {
-    @include buttonStyle($dark-red);
-  }
-
   .product-list {
     display: grid;
     width: 100%;

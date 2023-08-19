@@ -1,0 +1,19 @@
+@import "../Styles/_Variables.scss";
+
+.btn-success {
+  @include buttonStyle($light-green);
+}
+
+.btn-success:hover,
+.btn-success:active {
+  @include buttonStyle($dark-green);
+}
+
+.btn-danger {
+  @include buttonStyle($light-red);
+}
+
+.btn-danger:hover,
+.btn-danger:active {
+  @include buttonStyle($dark-red);
+}

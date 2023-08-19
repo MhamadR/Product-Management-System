@@ -3,24 +3,6 @@
 .add-products-container {
   width: 100%;
 
-  .save-btn {
-    @include buttonStyle($light-green);
-  }
-
-  .save-btn:hover,
-  .save-btn:active {
-    @include buttonStyle($dark-green);
-  }
-
-  .cancel-btn {
-    @include buttonStyle($light-red);
-  }
-
-  .cancel-btn:hover,
-  .cancel-btn:active {
-    @include buttonStyle($dark-red);
-  }
-
   .product-form {
     width: 100%;
     display: flex;
