@@ -8,6 +8,7 @@ function ProductCard({
   price,
   property,
   value,
+  isChecked,
   onCheckBoxChange,
 }) {
   function handleCheckBoxChange(e) {
@@ -21,6 +22,7 @@ function ProductCard({
         className="delete-checkbox"
         name={name}
         id={id}
+        checked={isChecked}
         onChange={handleCheckBoxChange}
       />
       <label htmlFor={id}>
@@ -43,6 +45,7 @@ ProductCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   property: PropTypes.string,
   value: PropTypes.string,
+  isChecked: PropTypes.bool,
   onCheckBoxChange: PropTypes.func,
 };
 
