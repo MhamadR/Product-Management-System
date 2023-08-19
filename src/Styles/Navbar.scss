@@ -5,8 +5,14 @@
   border-bottom: 0.0625rem solid black;
   padding: 0 0.3125rem;
 
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+    padding-bottom: 0.8375rem;
+  }
+
   .navbar-title {
-    font-size: 1.25rem;
+    font-size: 1.875rem;
+    text-align: center;
   }
 
   .navbar-buttons {
