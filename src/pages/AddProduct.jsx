@@ -102,29 +102,34 @@ function AddProduct() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // Check if any of the formInput properties is empty
-    const emptyInputKeys = Object.keys(formInput).filter(
-      (key) => formInput[key] === ""
-    );
-
-    if (emptyInputKeys.length > 0) {
-      // If any property is empty, set the errors state
-      const newErrors = {};
-      emptyInputKeys.forEach((key) => {
-        newErrors[key] = `${key} is empty`;
-      });
-
-      // Show form message for a period
+    const handleErrors = (newErrors) => {
       setErrors(() => ({
         ...newErrors,
         formMessage: "Please, submit required data",
       }));
+      // Show form message for a period
       setTimeout(() => {
         setErrors((prev) => ({
           ...prev,
           formMessage: undefined,
         }));
       }, 3000);
+    };
+
+    // Check if any of the formInput properties is empty
+    const emptyInputKeys = Object.keys(formInput).filter(
+      (key) => formInput[key] === ""
+    );
+
+    if (emptyInputKeys.length > 0) {
+      const newErrors = {};
+
+      // If any property is empty, set the errors state
+      emptyInputKeys.forEach((key) => {
+        newErrors[key] = `${key} is empty`;
+      });
+
+      handleErrors(newErrors);
     } else {
       // If all properties are filled, perform the POST request
       try {
@@ -132,7 +137,9 @@ function AddProduct() {
         navigate("/");
       } catch (error) {
         if (error.response?.data) {
-          console.log(error.response.data);
+          // If an error occur, set the errors state
+          handleErrors(error.response.data);
+          console.clear(); // To not allow the browser to show response errors
         } else {
           console.log(`Error: ${error}, Error Message: ${error.message}`);
         }
