@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import Button from "../components/Button";
 import ProductCard from "../components/ProductCard";
 import axios from "axios";
 import "../Styles/ProductList.scss";
-import Button from "../components/Button";
 
 function ProductList() {
   const [products, setProducts] = useState(null);
