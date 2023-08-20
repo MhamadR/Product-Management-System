@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import axios from "axios";
@@ -13,6 +14,7 @@ function AddProduct() {
     size: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
   const URL = "/api/products";
 
   function handleInputChange({ target: { name, value, inputMode } }) {
@@ -126,7 +128,8 @@ function AddProduct() {
     } else {
       // If all properties are filled, perform the POST request
       try {
-        await axios.post(URL, { ...formInput });
+        await axios.post(URL, formInput);
+        navigate("/");
       } catch (error) {
         if (error.response?.data) {
           console.log(error.response.data);
