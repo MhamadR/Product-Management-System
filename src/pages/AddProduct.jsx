@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import axios from "axios";
 import "../Styles/AddProduct.scss";
+import InputField from "../components/InputField";
 
 function AddProduct() {
   const [formInput, setFormInput] = useState({
@@ -21,11 +22,6 @@ function AddProduct() {
     // Filter out spaces for all input types
     if (value === " ") {
       return;
-    }
-
-    // If value is empty, set invalid message
-    if (value === "") {
-      setErrors((prev) => ({ ...prev, [name]: `${name} is empty` }));
     }
 
     // If input is decimal, filter out invalid characters
@@ -51,7 +47,7 @@ function AddProduct() {
     setFormInput((prev) => ({ ...prev, [name]: value }));
 
     // reset invalid message if value is no longer empty
-    if (errors[name]) {
+    if (errors[name] && value !== "") {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   }
@@ -139,7 +135,7 @@ function AddProduct() {
         if (error.response?.data) {
           // If an error occur, set the errors state
           handleErrors(error.response.data);
-          console.clear(); // To not allow the browser to show response errors
+          console.clear(); // To not allow the browser to show response codes as errors
         } else {
           console.log(`Error: ${error}, Error Message: ${error.message}`);
         }
@@ -165,158 +161,115 @@ function AddProduct() {
         {errors.formMessage && (
           <p className="invalid-message form-message">{errors.formMessage}</p>
         )}
-        <div className="input-container">
-          <label htmlFor="sku">SKU</label>
-          <input
-            type="text"
-            name="sku"
-            id="sku"
-            className={errors.sku ? "invalid" : ""}
-            maxLength={255}
-            value={formInput.sku}
-            onChange={handleInputChange}
-          />
-          {errors.sku && <p className="invalid-message">{errors.sku}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className={errors.name ? "invalid" : ""}
-            maxLength={255}
-            value={formInput.name}
-            onChange={handleInputChange}
-          />
-          {errors.name && <p className="invalid-message">{errors.name}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="price">Price ($)</label>
-          <input
-            type="text"
-            name="price"
-            id="price"
-            className={errors.price ? "invalid" : ""}
-            inputMode="decimal"
-            maxLength={10}
-            value={formInput.price}
-            onChange={handleInputChange}
-          />
-          {errors.price && <p className="invalid-message">{errors.price}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="productType">Type Switcher</label>
-          <select
-            name="product-type"
-            id="productType"
-            value={formInput.type}
-            onChange={handleTypeChange}
-          >
-            <option value="DVD" id="DVD">
-              DVD
-            </option>
-            <option value="Furniture" id="Furniture">
-              Furniture
-            </option>
-            <option value="Book" id="Book">
-              Book
-            </option>
-          </select>
-        </div>
+        <InputField
+          label="SKU"
+          name="sku"
+          id="sku"
+          maxLength="255"
+          value={formInput.sku}
+          onChange={handleInputChange}
+          error={errors.sku}
+        />
+        <InputField
+          label="Name"
+          name="name"
+          id="name"
+          maxLength="255"
+          value={formInput.name}
+          onChange={handleInputChange}
+          error={errors.name}
+        />
+        <InputField
+          label="Price ($)"
+          name="price"
+          id="price"
+          maxLength="10"
+          inputMode="decimal"
+          value={formInput.price}
+          onChange={handleInputChange}
+          error={errors.price}
+        />
+        <InputField
+          label="Type Switcher"
+          name="productType"
+          id="productType"
+          maxLength="10"
+          inputMode="decimal"
+          value={formInput.type}
+          onChange={handleTypeChange}
+          selectOptions={[
+            { value: "DVD" },
+            { value: "Furniture" },
+            { value: "Book" },
+          ]}
+        />
         {"size" in formInput && (
           <>
             <p className="dynamic-message">Please provide a size</p>
-            <div className="input-container">
-              <label htmlFor="size">Size (MB)</label>
-              <input
-                type="text"
-                name="size"
-                id="size"
-                className={errors.size ? "invalid" : ""}
-                inputMode="decimal"
-                maxLength={10}
-                value={formInput.size}
-                onChange={handleInputChange}
-              />
-              {errors.size && <p className="invalid-message">{errors.size}</p>}
-            </div>
+            <InputField
+              label="Size (MB)"
+              name="size"
+              id="size"
+              maxLength="10"
+              inputMode="decimal"
+              value={formInput.size}
+              onChange={handleInputChange}
+              error={errors.size}
+            />
           </>
         )}
         {"height" in formInput && (
           <>
             <p className="dynamic-message">Please provide dimensions</p>
-            <div className="input-container">
-              <label htmlFor="height">Height (CM)</label>
-              <input
-                type="text"
-                name="height"
-                id="height"
-                className={errors.height ? "invalid" : ""}
-                inputMode="decimal"
-                maxLength={10}
-                value={formInput.height}
-                onChange={handleInputChange}
-              />
-              {errors.height && (
-                <p className="invalid-message">{errors.height}</p>
-              )}
-            </div>
+            <InputField
+              label="Height (CM)"
+              name="height"
+              id="height"
+              maxLength="10"
+              inputMode="decimal"
+              value={formInput.height}
+              onChange={handleInputChange}
+              error={errors.height}
+            />
           </>
         )}
         {"width" in formInput && (
-          <div className="input-container">
-            <label htmlFor="width">Width (CM)</label>
-            <input
-              type="text"
-              name="width"
-              id="width"
-              className={errors.width ? "invalid" : ""}
-              value={formInput.width}
-              inputMode="decimal"
-              maxLength={10}
-              onChange={handleInputChange}
-            />
-            {errors.width && <p className="invalid-message">{errors.width}</p>}
-          </div>
+          <InputField
+            label="Width (CM)"
+            name="width"
+            id="width"
+            maxLength="10"
+            inputMode="decimal"
+            value={formInput.width}
+            onChange={handleInputChange}
+            error={errors.width}
+          />
         )}
         {"length" in formInput && (
-          <div className="input-container">
-            <label htmlFor="length">Length (CM)</label>
-            <input
-              type="number"
-              name="length"
-              id="length"
-              className={errors.length ? "invalid" : ""}
-              inputMode="decimal"
-              maxLength={10}
-              value={formInput.length}
-              onChange={handleInputChange}
-            />
-            {errors.length && (
-              <p className="invalid-message">{errors.length}</p>
-            )}
-          </div>
+          <InputField
+            label="Length (CM)"
+            name="length"
+            id="length"
+            maxLength="10"
+            inputMode="decimal"
+            value={formInput.length}
+            onChange={handleInputChange}
+            error={errors.length}
+          />
         )}
         {"weight" in formInput && (
           <>
             <p className="dynamic-message">Please provide a weight</p>
-            <div className="input-container">
-              <label htmlFor="weight">Weight (KG)</label>
-              <input
-                type="text"
-                name="weight"
-                id="weight"
-                className={errors.weight ? "invalid" : ""}
-                inputMode="decimal"
-                maxLength={10}
-                value={formInput.weight}
-                onChange={handleInputChange}
-              />
-              {errors.weight && (
-                <p className="invalid-message">{errors.weight}</p>
-              )}
-            </div>
+            <InputField
+              label="Weight (KG)"
+              name="weight"
+              id="weight"
+              maxLength="10"
+              inputMode="decimal"
+              value={formInput.weight}
+              onChange={handleInputChange}
+              error={errors.weight}
+            />
           </>
         )}
       </form>
