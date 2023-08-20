@@ -101,16 +101,12 @@ function ProductList() {
   return (
     <div className="products-list-container">
       <Navbar title="Product List">
-        <Button
-          to="/add-product"
-          className="add-btn btn-success"
-          value={"ADD"}
-        />
+        <Button to="/add-product" className="add-btn btn-success" value="ADD" />
         <Button
           id="delete-product-btn"
           className="delete-btn btn-danger"
           onClick={deleteProductsByIds}
-          value={"MASS DELETE"}
+          value="MASS DELETE"
         />
       </Navbar>
       <div className="product-list">{productList}</div>
