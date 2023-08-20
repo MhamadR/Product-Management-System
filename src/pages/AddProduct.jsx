@@ -165,7 +165,6 @@ function AddProduct() {
             name="sku"
             id="sku"
             className={errors.sku ? "invalid" : ""}
-            maxLength="11"
             value={formInput.sku}
             onChange={handleInputChange}
           />
@@ -178,7 +177,6 @@ function AddProduct() {
             name="name"
             id="name"
             className={errors.name ? "invalid" : ""}
-            maxLength="11"
             value={formInput.name}
             onChange={handleInputChange}
           />
