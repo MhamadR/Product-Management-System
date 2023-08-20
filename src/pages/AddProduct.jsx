@@ -19,7 +19,7 @@ function AddProduct() {
 
   function handleInputChange({ target: { name, value, inputMode } }) {
     // Filter out spaces for all input types
-    if (value.includes(" ")) {
+    if (value === " ") {
       return;
     }
 
