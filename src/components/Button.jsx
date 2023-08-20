@@ -14,7 +14,7 @@ function Button({ to, element, value, onClick, ...props }) {
       </Link>
     );
   } else if (element === "input") {
-    return <input value={value} onClick={handleClick} {...props} />;
+    return <input value={value} {...props} />;
   } else {
     return (
       <button onClick={handleClick} {...props}>
