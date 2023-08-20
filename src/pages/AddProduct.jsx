@@ -1,19 +1,21 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import "../Styles/AddProduct.scss";
 import Button from "../components/Button";
+import axios from "axios";
+import "../Styles/AddProduct.scss";
 
 function AddProduct() {
   const [formInput, setFormInput] = useState({
     sku: "",
     name: "",
     price: "",
+    type: "DVD",
     size: "",
   });
-
   const [errors, setErrors] = useState({});
+  const URL = "/api/products";
 
-  function handleInputChange({ target: { name, value } }) {
+  function handleInputChange({ target: { name, value, inputMode } }) {
     // Filter out spaces for all input types
     if (value.includes(" ")) {
       return;
@@ -22,6 +24,25 @@ function AddProduct() {
     // If value is empty, set invalid message
     if (value === "") {
       setErrors((prev) => ({ ...prev, [name]: `${name} is empty` }));
+    }
+
+    // If input is decimal, filter out invalid characters
+    if (inputMode === "decimal") {
+      // Remove all non-numeric and non-decimal characters
+      let sanitizedValue = value.replace(/[^0-9.]/g, "");
+
+      const decimalIndex = sanitizedValue.indexOf(".");
+      // Ensure no decimal point is set at the beginning
+      if (decimalIndex === 0) {
+        sanitizedValue = sanitizedValue.replace(/\./, "");
+      }
+      // Ensure only one decimal point exists
+      if (decimalIndex !== -1) {
+        sanitizedValue =
+          sanitizedValue.substring(0, decimalIndex + 1) +
+          sanitizedValue.substring(decimalIndex + 1).replace(/\./g, "");
+      }
+      value = sanitizedValue;
     }
 
     // Set value
@@ -35,6 +56,7 @@ function AddProduct() {
 
   function handleTypeChange(e) {
     const type = e.target.value;
+    console.log(type);
     // Change formInput properties according to the type of product
     switch (type) {
       case "Furniture":
@@ -43,6 +65,7 @@ function AddProduct() {
             sku,
             name,
             price,
+            type: type,
             height: "",
             width: "",
             length: "",
@@ -55,6 +78,7 @@ function AddProduct() {
             sku,
             name,
             price,
+            type: type,
             weight: "",
           };
         });
@@ -66,6 +90,7 @@ function AddProduct() {
             sku,
             name,
             price,
+            type: type,
             size: "",
           };
         });
@@ -73,7 +98,7 @@ function AddProduct() {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     // Check if any of the formInput properties is empty
     const emptyInputKeys = Object.keys(formInput).filter(
@@ -100,7 +125,15 @@ function AddProduct() {
       }, 3000);
     } else {
       // If all properties are filled, perform the POST request
-      console.log("Valid!");
+      try {
+        await axios.post(URL, { ...formInput });
+      } catch (error) {
+        if (error.response?.data) {
+          console.log(error.response.data);
+        } else {
+          console.log(`Error: ${error}, Error Message: ${error.message}`);
+        }
+      }
     }
   }
 
@@ -151,17 +184,13 @@ function AddProduct() {
         <div className="input-container">
           <label htmlFor="price">Price ($)</label>
           <input
-            type="number"
+            type="text"
             name="price"
             id="price"
             className={errors.price ? "invalid" : ""}
-            min="0"
+            inputMode="decimal"
             value={formInput.price}
             onChange={handleInputChange}
-            // filter out "e", "E", "+", "-" from the inputs with type number
-            onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            }
           />
           {errors.price && <p className="invalid-message">{errors.price}</p>}
         </div>
@@ -170,6 +199,7 @@ function AddProduct() {
           <select
             name="product-type"
             id="productType"
+            value={formInput.type}
             onChange={handleTypeChange}
           >
             <option value="DVD" id="DVD">
@@ -189,16 +219,13 @@ function AddProduct() {
             <div className="input-container">
               <label htmlFor="size">Size (MB)</label>
               <input
-                type="number"
+                type="text"
                 name="size"
                 id="size"
                 className={errors.size ? "invalid" : ""}
-                min="0"
+                inputMode="decimal"
                 value={formInput.size}
                 onChange={handleInputChange}
-                onKeyDown={(e) =>
-                  ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-                }
               />
               {errors.size && <p className="invalid-message">{errors.size}</p>}
             </div>
@@ -210,16 +237,13 @@ function AddProduct() {
             <div className="input-container">
               <label htmlFor="height">Height (CM)</label>
               <input
-                type="number"
+                type="text"
                 name="height"
                 id="height"
                 className={errors.height ? "invalid" : ""}
-                min="0"
+                inputMode="decimal"
                 value={formInput.height}
                 onChange={handleInputChange}
-                onKeyDown={(e) =>
-                  ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-                }
               />
               {errors.height && (
                 <p className="invalid-message">{errors.height}</p>
@@ -231,16 +255,13 @@ function AddProduct() {
           <div className="input-container">
             <label htmlFor="width">Width (CM)</label>
             <input
-              type="number"
+              type="text"
               name="width"
               id="width"
               className={errors.width ? "invalid" : ""}
-              min="0"
               value={formInput.width}
+              inputMode="decimal"
               onChange={handleInputChange}
-              onKeyDown={(e) =>
-                ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-              }
             />
             {errors.width && <p className="invalid-message">{errors.width}</p>}
           </div>
@@ -253,12 +274,9 @@ function AddProduct() {
               name="length"
               id="length"
               className={errors.length ? "invalid" : ""}
-              min="0"
+              inputMode="decimal"
               value={formInput.length}
               onChange={handleInputChange}
-              onKeyDown={(e) =>
-                ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-              }
             />
             {errors.length && (
               <p className="invalid-message">{errors.length}</p>
@@ -271,16 +289,13 @@ function AddProduct() {
             <div className="input-container">
               <label htmlFor="weight">Weight (KG)</label>
               <input
-                type="number"
+                type="text"
                 name="weight"
                 id="weight"
                 className={errors.weight ? "invalid" : ""}
-                min="0"
+                inputMode="decimal"
                 value={formInput.weight}
                 onChange={handleInputChange}
-                onKeyDown={(e) =>
-                  ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-                }
               />
               {errors.weight && (
                 <p className="invalid-message">{errors.weight}</p>
