@@ -190,6 +190,7 @@ function AddProduct() {
             id="price"
             className={errors.price ? "invalid" : ""}
             inputMode="decimal"
+            maxLength={10}
             value={formInput.price}
             onChange={handleInputChange}
           />
@@ -225,6 +226,7 @@ function AddProduct() {
                 id="size"
                 className={errors.size ? "invalid" : ""}
                 inputMode="decimal"
+                maxLength={10}
                 value={formInput.size}
                 onChange={handleInputChange}
               />
@@ -243,6 +245,7 @@ function AddProduct() {
                 id="height"
                 className={errors.height ? "invalid" : ""}
                 inputMode="decimal"
+                maxLength={10}
                 value={formInput.height}
                 onChange={handleInputChange}
               />
@@ -262,6 +265,7 @@ function AddProduct() {
               className={errors.width ? "invalid" : ""}
               value={formInput.width}
               inputMode="decimal"
+              maxLength={10}
               onChange={handleInputChange}
             />
             {errors.width && <p className="invalid-message">{errors.width}</p>}
@@ -276,6 +280,7 @@ function AddProduct() {
               id="length"
               className={errors.length ? "invalid" : ""}
               inputMode="decimal"
+              maxLength={10}
               value={formInput.length}
               onChange={handleInputChange}
             />
@@ -295,6 +300,7 @@ function AddProduct() {
                 id="weight"
                 className={errors.weight ? "invalid" : ""}
                 inputMode="decimal"
+                maxLength={10}
                 value={formInput.weight}
                 onChange={handleInputChange}
               />
