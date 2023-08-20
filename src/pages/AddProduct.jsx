@@ -20,8 +20,8 @@ function AddProduct() {
 
   function handleInputChange({ target: { name, value, inputMode } }) {
     // Filter out spaces for all input types
-    if (value === " ") {
-      return;
+    if (value.indexOf(" ") === 0) {
+      value = value.substring(1);
     }
 
     // If input is decimal, filter out invalid characters
@@ -54,46 +54,27 @@ function AddProduct() {
 
   function handleTypeChange(e) {
     const type = e.target.value;
-    console.log(type);
+    let data = {};
     // Change formInput properties according to the type of product
     switch (type) {
       case "Furniture":
-        setFormInput(({ sku, name, price }) => {
-          return {
-            sku,
-            name,
-            price,
-            type: type,
-            height: "",
-            width: "",
-            length: "",
-          };
-        });
+        data = { height: "", width: "", length: "" };
         break;
       case "Book":
-        setFormInput(({ sku, name, price }) => {
-          return {
-            sku,
-            name,
-            price,
-            type: type,
-            weight: "",
-          };
-        });
+        data = { weight: "" };
         break;
 
       default:
-        setFormInput(({ sku, name, price }) => {
-          return {
-            sku,
-            name,
-            price,
-            type: type,
-            size: "",
-          };
-        });
+        data = { size: "" };
         break;
     }
+    setFormInput(({ sku, name, price }) => ({
+      sku,
+      name,
+      price,
+      type: type,
+      ...data,
+    }));
   }
 
   async function handleSubmit(e) {
