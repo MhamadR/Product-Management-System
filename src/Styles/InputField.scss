@@ -1,0 +1,65 @@
+@import "../Styles/_Variables.scss";
+
+.product-form-input-container {
+  width: min(100%, 768px);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.1875rem;
+
+  label {
+    font-size: 1.125rem;
+  }
+
+  .product-form-input {
+    width: 100%;
+  }
+
+  .product-form-input,
+  .product-form-select {
+    border: 0.0625rem solid hsl(0, 0%, 52%);
+    border-radius: 3px;
+  }
+
+  .product-form-select {
+    width: fit-content;
+    max-width: 100%;
+    align-self: end;
+  }
+
+  .product-form-input:focus,
+  .product-form-select:focus {
+    outline: 0.125rem solid hsl(0, 0%, 35%);
+  }
+
+  .product-form-input.invalid {
+    border: 0.0625rem solid $light-red;
+  }
+
+  .product-form-input.invalid:focus {
+    outline: 0.125rem solid $dark-red;
+  }
+
+  .product-form-input-error-message {
+    width: 100%;
+    flex: 0 0 100%;
+    align-self: flex-end;
+    text-align: end;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $dark-red;
+    min-height: 18.4px;
+  }
+
+  @media screen and (min-width: 420px) {
+    flex-flow: row wrap;
+    align-items: center;
+    .product-form-input {
+      flex: 0 0 50%;
+    }
+  }
+  //   @media screen and (min-width: 768px) {
+  //     width: 50%;
+  //   }
+}
