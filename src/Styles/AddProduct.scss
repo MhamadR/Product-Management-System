@@ -1,6 +1,6 @@
 @import "../Styles/_Variables.scss";
 
-.add-products-container {
+.add-product-container {
   width: 100%;
 
   .product-form {
@@ -8,71 +8,22 @@
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
-
     padding: 0.625rem 0.3125rem;
 
-    .input-container {
-      width: min(100%, 350px);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.1875rem;
-
-      @media screen and (max-width: 340px) {
-        flex-direction: column;
-        align-items: start;
-      }
-
-      input,
-      select {
-        max-width: 100%;
-        border: 1px solid hsl(0, 0%, 52%);
-        border-radius: 3px;
-      }
-
-      input:focus,
-      select:focus {
-        outline: 2px solid hsl(0, 0%, 35%);
-      }
-
-      input.invalid {
-        border: 1px solid $light-red;
-      }
-
-      input.invalid:focus {
-        outline: 2px solid $dark-red;
-      }
-
-      // Remove arrow controllers on inputs with type number
-      input[type="number"]::-webkit-outer-spin-button,
-      input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
-      input[type="number"] {
-        -moz-appearance: textfield;
-        appearance: textfield;
-      }
-    }
-
-    .dynamic-message {
-      font-size: 10px;
+    .product-form-dynamic-message {
+      width: min(100%, 768px);
+      font-size: 16px;
       font-weight: 600;
       color: hsl(0, 0%, 52%);
     }
 
-    .invalid-message {
-      flex: 1 0 100%;
-      align-self: flex-end;
-      text-align: end;
-      font-size: 0.625rem;
-      font-weight: 600;
-      color: $dark-red;
-    }
-
-    .form-message {
+    .product-form-error-message {
       text-align: center;
       align-self: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: $dark-red;
+      min-height: 18.4px;
     }
   }
 }
