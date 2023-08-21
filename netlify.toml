@@ -3,3 +3,8 @@
   to = "https://antiwar-containers.000webhostapp.com/:splat"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
