@@ -132,10 +132,10 @@ function AddProduct() {
           type="submit"
           id="save-product-btn"
           className="save-btn btn-success"
-          value="SAVE"
+          value="Save"
           form="product_form"
         />
-        <Button to="/" className="cancel-btn btn-danger" value={"CANCEL"} />
+        <Button to="/" className="cancel-btn btn-danger" value={"Cancel"} />
       </Navbar>
 
       <form id="product_form" className="product-form" onSubmit={handleSubmit}>
