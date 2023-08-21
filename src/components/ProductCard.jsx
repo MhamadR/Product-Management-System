@@ -19,17 +19,17 @@ function ProductCard({
     <div className="product-card">
       <input
         type="checkbox"
-        className="delete-checkbox"
+        className="product-card-checkbox"
         name={name}
         id={id}
         checked={isChecked}
         onChange={handleCheckBoxChange}
       />
-      <label htmlFor={id}>
-        <p>{sku} </p>
-        <p> {name}</p>
-        <p> {price} $ </p>
-        <p>
+      <label htmlFor={id} className="product-card-label">
+        <p className="product-card-value">{sku} </p>
+        <p className="product-card-value"> {name}</p>
+        <p className="product-card-value"> {price} $ </p>
+        <p className="product-card-value">
           {property}: {value}
         </p>
       </label>
