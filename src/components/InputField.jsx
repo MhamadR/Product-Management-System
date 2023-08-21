@@ -1,5 +1,5 @@
-// InputField.js
 import PropTypes from "prop-types";
+import "../Styles/InputField.scss";
 
 function InputField({
   label,
@@ -12,11 +12,12 @@ function InputField({
 }) {
   if (selectOptions) {
     return (
-      <div className="input-container">
+      <div className="product-form-input-container">
         <label htmlFor={name}>{label}</label>
         <select
           name={name}
           id={name}
+          className="product-form-select"
           value={value}
           onChange={onChange}
           {...props}
@@ -31,18 +32,20 @@ function InputField({
     );
   } else {
     return (
-      <div className="input-container">
+      <div className="product-form-input-container">
         <label htmlFor={name}>{label}</label>
         <input
           type="text"
           name={name}
           id={name}
-          className={error ? "invalid" : ""}
+          className={
+            error ? "product-form-input invalid" : "product-form-input"
+          }
           value={value}
           onChange={onChange}
           {...props}
         />
-        {error && <p className="invalid-message">{error}</p>}
+        <p className="product-form-input-error-message">{error}</p>
       </div>
     );
   }
