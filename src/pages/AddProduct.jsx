@@ -82,7 +82,7 @@ function AddProduct() {
     const handleErrors = (newErrors) => {
       setErrors(() => ({
         ...newErrors,
-        formMessage: "Please, submit required data",
+        formMessage: "Please submit required data",
       }));
       // Show form message for a period
       setTimeout(() => {
@@ -125,7 +125,7 @@ function AddProduct() {
   }
 
   return (
-    <div className="add-products-container">
+    <div className="add-product-container">
       <Navbar title="Add Product">
         <Button
           element={"input"}
@@ -139,9 +139,8 @@ function AddProduct() {
       </Navbar>
 
       <form id="product_form" className="product-form" onSubmit={handleSubmit}>
-        {errors.formMessage && (
-          <p className="invalid-message form-message">{errors.formMessage}</p>
-        )}
+        <p className="product-form-error-message">{errors.formMessage}</p>
+
         <InputField
           label="SKU"
           name="sku"
@@ -186,7 +185,9 @@ function AddProduct() {
         />
         {"size" in formInput && (
           <>
-            <p className="dynamic-message">Please provide a size</p>
+            <p className="product-form-dynamic-message">
+              Please provide a size
+            </p>
             <InputField
               label="Size (MB)"
               name="size"
@@ -201,7 +202,9 @@ function AddProduct() {
         )}
         {"height" in formInput && (
           <>
-            <p className="dynamic-message">Please provide dimensions</p>
+            <p className="product-form-dynamic-message">
+              Please provide dimensions
+            </p>
             <InputField
               label="Height (CM)"
               name="height"
@@ -240,7 +243,9 @@ function AddProduct() {
         )}
         {"weight" in formInput && (
           <>
-            <p className="dynamic-message">Please provide a weight</p>
+            <p className="product-form-dynamic-message">
+              Please provide a weight
+            </p>
             <InputField
               label="Weight (KG)"
               name="weight"
