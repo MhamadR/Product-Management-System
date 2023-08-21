@@ -19,7 +19,7 @@ function ProductCard({
     <div className="product-card">
       <input
         type="checkbox"
-        className="product-card-checkbox delete-checkbox"
+        className="delete-checkbox"
         name={name}
         id={id}
         checked={isChecked}
