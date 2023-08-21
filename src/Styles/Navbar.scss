@@ -1,13 +1,14 @@
 .navbar {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.0625rem solid black;
-  padding: 0 0.3125rem;
+  padding-bottom: 0.8375rem;
 
-  @media screen and (max-width: 420px) {
-    flex-direction: column;
-    padding-bottom: 0.8375rem;
+  @media screen and (min-width: 420px) {
+    flex-direction: row;
+    padding: 0 0.3125rem;
   }
 
   .navbar-title {
@@ -17,7 +18,11 @@
 
   .navbar-buttons {
     display: flex;
-    height: fit-content;
+    flex-direction: column;
     gap: 0.3125rem;
+    max-width: 100%;
+    @media screen and (min-width: 210px) {
+      flex-direction: row;
+    }
   }
 }
